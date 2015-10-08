@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/ameba-lea-model/src" modelPluginID="ameba-lea-model"
+    modelName="Lea" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>lea.ecore</foreignModel>
+  <genPackages prefix="Lea" basePackage="org.ameba.lea.model" disposableProviderFactory="true"
+      ecorePackage="lea.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="lea.ecore#//Katalogstatus">
+      <genEnumLiterals ecoreEnumLiteral="lea.ecore#//Katalogstatus/FREIGEGEBEN"/>
+      <genEnumLiterals ecoreEnumLiteral="lea.ecore#//Katalogstatus/NEU"/>
+      <genEnumLiterals ecoreEnumLiteral="lea.ecore#//Katalogstatus/INAKTIV"/>
+    </genEnums>
+    <genClasses ecoreClass="lea.ecore#//Bereichgruppe">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference lea.ecore#//Bereichgruppe/bereich"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute lea.ecore#//Bereichgruppe/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute lea.ecore#//Bereichgruppe/obligatorisch"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute lea.ecore#//Bereichgruppe/inUebersicht"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference lea.ecore#//Bereichgruppe/kriterium"/>
+    </genClasses>
+    <genClasses ecoreClass="lea.ecore#//Katalog">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute lea.ecore#//Katalog/status"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute lea.ecore#//Katalog/version"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference lea.ecore#//Katalog/hauptbereich"/>
+    </genClasses>
+    <genClasses ecoreClass="lea.ecore#//Bereich">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute lea.ecore#//Bereich/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference lea.ecore#//Bereich/kriterium"/>
+    </genClasses>
+    <genClasses ecoreClass="lea.ecore#//Kriterium">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference lea.ecore#//Kriterium/parent"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference lea.ecore#//Kriterium/obereZertifizierungsklasse"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference lea.ecore#//Kriterium/untereZertifizierungsklasse"/>
+    </genClasses>
+    <genClasses ecoreClass="lea.ecore#//Zertifizierungsklasse">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute lea.ecore#//Zertifizierungsklasse/titel"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute lea.ecore#//Zertifizierungsklasse/beschreibung"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute lea.ecore#//Zertifizierungsklasse/grundlagen"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
