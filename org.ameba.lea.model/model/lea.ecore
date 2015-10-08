@@ -1,42 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="lea" nsURI="http://www.ameba.org/lea" nsPrefix="lea">
+  <eClassifiers xsi:type="ecore:EClass" name="Zertifizierungsklasse">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="titel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="beschreibung" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="grundlagen" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Bereichgruppe">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="bereich" upperBound="-1"
-        eType="#//Bereich" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="obligatorisch" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="inUebersicht" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="kriterium" upperBound="-1"
-        eType="#//Kriterium"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Kriterium" upperBound="-1"
+        eType="#//Kriterium" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="vorkommen" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mehrfachAuswaehlbar" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Untergruppe" upperBound="-1"
+        eType="#//Bereichgruppe" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="DefaultUntergruppe" eType="#//Bereichgruppe"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Katalog">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//Katalogstatus"
         defaultValueLiteral="NEU"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="hauptbereich" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Hauptbereich" lowerBound="1"
         upperBound="-1" eType="#//Bereichgruppe" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Zertifizierungsklassen"
+        lowerBound="1" upperBound="-1" eType="#//Zertifizierungsklasse" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Bereich">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="kriterium" upperBound="-1"
-        eType="#//Kriterium"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Kriterium">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Parent" eType="#//Kriterium"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="obereZertifizierungsklasse"
+        eType="#//Zertifizierungsklasse"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="untereZertifizierungsklasse"
+        eType="#//Zertifizierungsklasse"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="positionId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Int"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="titel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ausschlussKriterium" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="messresultatObligatorisch"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resultatParent" eType="#//Messresultat"
+        defaultValueLiteral="NICHT_BEURTEILBAR" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="masseinheit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typ" eType="#//KriteriumsTyp"
+        unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Messresultat">
+    <eLiterals name="JA"/>
+    <eLiterals name="NEIN" value="1"/>
+    <eLiterals name="NICHT_BEURTEILBAR" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Katalogstatus">
     <eLiterals name="FREIGEGEBEN"/>
     <eLiterals name="NEU" value="1"/>
     <eLiterals name="INAKTIV" value="2"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Kriterium">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//Kriterium"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="obereZertifizierungsklasse"
-        eType="#//Zertifizierungsklasse"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="untereZertifizierungsklasse"
-        eType="#//Zertifizierungsklasse"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Zertifizierungsklasse">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="titel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="beschreibung" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="grundlagen" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="KriteriumsTyp">
+    <eLiterals name="NORMAL"/>
+    <eLiterals name="GRAU" value="1"/>
   </eClassifiers>
 </ecore:EPackage>
