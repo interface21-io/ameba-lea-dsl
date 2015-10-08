@@ -1,2 +1,2 @@
 # ameba-lea-model
-Ecore model of the catalog and criteria definition
+Ecore model ond xtext DSL of the catalog and criteria definition
